@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "micro"
+    "start": "micro",
+    "deploy": "now && now alias && now remove surrealscenerycaption --safe"
   },
   "author": "",
   "license": "ISC",
