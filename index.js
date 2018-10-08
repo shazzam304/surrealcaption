@@ -1,1 +1,1 @@
-module.exports = () => 'Aloha, universe!'
+module.exports = () => 'whoa, universe!'
