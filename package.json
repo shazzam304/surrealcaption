@@ -12,5 +12,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "micro": "^9.3.3"
+  },
+  "now": {
+    "alias": "surrealcaptionformat.sh"
   }
 }
