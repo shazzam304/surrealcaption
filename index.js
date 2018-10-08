@@ -1,6 +1,6 @@
-const {json} = require('micro')
+const {json, text} = require('micro')
 
 module.exports = async (req, res) => {
-  const par = await json(req)
+  const par = await text(req)
   return "params "+par
 }
