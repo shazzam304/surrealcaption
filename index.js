@@ -1,4 +1,4 @@
-const {json, send} = require('micro')
+const {json,text, send} = require('micro')
 const {router, get, post} = require('microrouter')
 const axios = require('axios')
 
@@ -18,14 +18,14 @@ module.exports = router(
 
   post('/removereblog', async (req, res) => {
     var body = await json(req)
-    body.title = body.title && body.title.replace(/^[a-zA-Z0-9]*: /i,"")
+    body.title = body.title && body.title.replace(/^[a-zA-Z0-9]*:/i,"")
     let response = await callHook(body)
     send(res, 200, body)
   }),
 
   post('/removebracketsandreblog', async (req, res) => {
     var body = await json(req)
-    body.title = body.title && body.title.replace(/^[a-zA-Z0-9]*: /i,"")
+    body.title = body.title && body.title.replace(/^[a-zA-Z0-9]*:/i,"")
     body.title = body.title && body.title.replace(/\[.*\]/i,"")
     let response = await callHook(body)
     send(res, 200, body)
