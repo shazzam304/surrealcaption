@@ -1,4 +1,4 @@
-const {json,text, send} = require('micro')
+const {json, send} = require('micro')
 const {router, get, post} = require('microrouter')
 const axios = require('axios')
 
