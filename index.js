@@ -18,7 +18,7 @@ module.exports = router(
 
   post('/removereblog', async (req, res) => {
     var body = await json(req)
-    body.title = body.title && body.title.replace(/^[a-zA-Z0-9]*:/i,"")
+    body.title = body.title && body.title.replace(/^.*:/i,"")
     let response = await callHook(body)
     send(res, 200, body)
   }),
