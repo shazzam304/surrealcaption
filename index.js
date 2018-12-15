@@ -31,4 +31,28 @@ module.exports = router(
     send(res, 200, body)
   }),
 
+  post('/checkimageurl', async (req, res) => {
+    let body = await json(req)
+    try {
+      if(body.imgurl.indexOf("no_image_card") > 0)
+        send(res, 200, "no image card found");
+      else {
+        let imgRes = await axios.head(body.imgurl)
+        if(imgRes.status == 200) {
+          console.log('calling hook')
+          let hookRes = await callHook(body)
+          send(res, 200, "hook call status "+hookRes.statusText)
+        }
+      }
+    }
+    catch(e){
+      console.log('error ',e.message)
+    }
+    send(res, 200, "invalid image url")
+  }),
+
+  post('/dump', async (req, res) => {
+    send(res, 200, 'dump done')
+  })
+
 )
