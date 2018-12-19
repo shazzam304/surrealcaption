@@ -50,6 +50,13 @@ module.exports = router(
     }
     send(res, 200, "invalid image url")
   }),
+  
+  post('/removebracketsandcheckimageurl', async (req, res) => {
+    var body = await json(req)
+    body.title = body.title && body.title.replace(/\[.*\]/i,"")
+    let response = await axios.post('/checkimageurl', body)
+    send(res, 200, body)
+  }),
 
   post('/dump', async (req, res) => {
     send(res, 200, 'dump done')
