@@ -7,7 +7,7 @@ const callHook = async body =>
 
 
 module.exports = router(
-  get('/', async (req, res) => `hiii`),
+  get('/', async (req, res) => `hiiii`),
 
   post('/removebrackets', async (req, res) => {
     var body = await json(req)
