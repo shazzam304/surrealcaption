@@ -1,9 +1,9 @@
-POST https://surrealcaptionformat.now.sh/removebracketsandcheckimageurl
+POST http://localhost:3000/removebracketsandcheckimageurl
 Content-Type: application/json
 
 {
     "title":"{{Title}} by {{Author}}",
     "imgurl":" https://cdn.pixabay.com/photo/2019/06/28/20/22/bridge-4304946_960_720.jpg",
-    "url":" {{PostURL}}",
+    "url":"https://www.reddit.com/r/crochet/comments/c7gpe2/ive_been_in_a_rut_so_im_playing_around_with/",
     "callbackurl":"https://maker.ifttt.com/trigger/tumblrpost/with/key/b5itM9wv5C8f-6ovk-On7p"
 }

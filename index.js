@@ -5,6 +5,25 @@ const axios = require('axios')
 const callHook = async body => 
   await axios.post(body.callbackurl, {value1: body.title, value2: body.imgurl, value3: body.tags})
 
+const checkimageurl = async body => {
+  try {
+    if(body.imgurl.indexOf("no_image_card") > 0)
+      send(res, 200, "no image card found");
+    else {
+      let imgRes = await axios.head(body.imgurl)
+      if(imgRes.status == 200) {
+        console.log('calling hook')
+        let hookRes = await callHook(body)
+        return "hook call status "+hookRes.statusText
+      }
+    }
+  }
+  catch(e){
+    console.log('error ',e.message)
+  }
+  return "invalid image url"
+}
+
 
 module.exports = router(
   get('/', async (req, res) => `hiiii`),
@@ -33,22 +52,8 @@ module.exports = router(
 
   post('/checkimageurl', async (req, res) => {
     let body = await json(req)
-    try {
-      if(body.imgurl.indexOf("no_image_card") > 0)
-        send(res, 200, "no image card found");
-      else {
-        let imgRes = await axios.head(body.imgurl)
-        if(imgRes.status == 200) {
-          console.log('calling hook')
-          let hookRes = await callHook(body)
-          send(res, 200, "hook call status "+hookRes.statusText)
-        }
-      }
-    }
-    catch(e){
-      console.log('error ',e.message)
-    }
-    send(res, 200, "invalid image url")
+    let result = await checkimageurl(body)
+    send(res, 200, result)
   }),
   
   post('/removebracketsandcheckimageurl', async (req, res) => {
@@ -56,8 +61,8 @@ module.exports = router(
     body.title = body.title && body.title.replace(/\[.*\]/i,"")
     if(body.url != undefined)
       body.title += ' <a href="'+body.url+'" >(source)</a>'
-    let response = await axios.post('https://surrealcaptionformat.now.sh/checkimageurl', body)
-    send(res, 200, response.data)
+    let result = await checkimageurl(body)
+    send(res, 200, result)
   }),
 
   post('/dump', async (req, res) => {
