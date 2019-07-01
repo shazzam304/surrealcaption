@@ -55,7 +55,7 @@ module.exports = router(
     var body = await json(req)
     body.title = body.title && body.title.replace(/\[.*\]/i,"")
     if(body.url != undefined)
-      body.title += ' <a href="'+body.url+'" >(source)</a>
+      body.title += ' <a href="'+body.url+'" >(source)</a>'
     let response = await axios.post('https://surrealcaptionformat.now.sh/checkimageurl', body)
     send(res, 200, response.data)
   }),
