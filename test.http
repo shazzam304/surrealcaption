@@ -2,7 +2,8 @@ POST http://localhost:3000/removebracketsandcheckimageurl
 Content-Type: application/json
 
 {
-    "title":"Sunset by Anon",
+    "title":"Sunset",
+    "author": "Anon",
     "imgurl":"https://cdn.pixabay.com/photo/2019/06/28/20/22/bridge-4304946_960_720.jpg",
     "url":"https://www.reddit.com/r/crochet/comments/c7t8bq/hoth_this_yarn_posted_the_blanket_earlier_but/?utm_source=ifttt",
     "callbackurl":"https://maker.ifttt.com/trigger/tumblrpost/with/key/b5itM9wv5C8f-6ovk-On7p"
