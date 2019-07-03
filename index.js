@@ -59,8 +59,13 @@ module.exports = router(
   post('/removebracketsandcheckimageurl', async (req, res) => {
     var body = await json(req)
     body.title = body.title && body.title.replace(/\[.*\]/i,"")
-    if(body.url != undefined)
+
+    if(body.url != undefined && body.author != undefined)
+      body.title += 'by <a href='+body.url+' >'+body.author+'</a>'
+
+    else if(body.url != undefined)
       body.title += ' <a href='+body.url+' >(source)</a>'
+      
     let result = await checkimageurl(body)
     send(res, 200, result)
   }),
